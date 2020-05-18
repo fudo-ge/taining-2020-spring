@@ -1,0 +1,44 @@
+HELP.md
+.gradle
+**/build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# properties
+application-local.properties
+application-*-local.properties
+gradle.properties
+
+# STS
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+# IntelliJ IDEA
+.idea
+*.iws
+*.iml
+*.ipr
+**/out/
+
+# Eclipse
+.classpath
+.project
+.settings/
+**/bin/
+
+# local
+temp
+
+# mac
+.DS_Store
+
+# windows
+Thumbs.db
+
+#npm
+**/node_modules
+**/static/_css/*.css
