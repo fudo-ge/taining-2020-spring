@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8" />
+	<title>SessTop</title>
+</head>
+<body>
+<h1>Session Training Form</h1>
+<form action="/sess" method="POST">
+	<input type="text" name="id" />
+	<input type="submit" value="送信" />
+</form>
+<p>セッションの値 : <th:block th:text=${reqForm}></th:block></p>
+<p>セッションスコープBean : <th:block th:text=${beanForm}></th:block></p>
+<a href="/delsess">Sessionを破棄する</a>
+</body>
+</html>
