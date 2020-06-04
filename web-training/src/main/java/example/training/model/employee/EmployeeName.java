@@ -16,7 +16,7 @@ public class EmployeeName {
 	}
 
 	public String fullName() {
-		return lastName + firstName;
+		return String.format("%s　%s", lastName, firstName);
 	}
 
 	public String getFirstName() {
