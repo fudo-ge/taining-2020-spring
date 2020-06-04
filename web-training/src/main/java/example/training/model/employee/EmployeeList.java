@@ -24,6 +24,14 @@ public class EmployeeList {
 		this.values = values;
 	}
 
+	public boolean isEmpty() {
+		return values.isEmpty();
+	}
+
+	public boolean isNotEmpty() {
+		return !values.isEmpty();
+	}
+
 	@Override
 	public String toString() {
 		return String.format("EmployeeList [values=%s]", values);

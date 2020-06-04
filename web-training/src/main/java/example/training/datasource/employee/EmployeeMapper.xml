@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="example.training.datasource.employee.EmployeeMapper">
+
+    <resultMap id="Employee" type="example.training.model.employee.Employee">
+        <id column="employee_id" property="id.value"/>
+        <result column="first_name" property="name.firstName"/>
+        <result column="last_name" property="name.lastName"/>
+        <result column="gender_type" property="gender" />
+        <result column="date_of_birth" property="dateOfBirth.value" />
+        <result column="department_id" property="department.id.value" />
+        <result column="department_name" property="department.name.value" />
+    </resultMap>
+
+    <sql id="selectColumns">
+    	employee.employee_id,
+		    employee.first_name,
+		    employee.last_name,
+		    employee.gender_type,
+		    employee.date_of_birth,
+		    department.department_id,
+		    department.department_name
+    </sql>
+
+    <select id="findById" resultMap="Employee">
+        SELECT
+		    <include refid="selectColumns" />
+		FROM
+		    employee.employee
+		INNER JOIN
+		    employee.department
+		ON
+		    employee.department_id = department.department_id
+		WHERE
+            employee_id = #{employeeId}
+    </select>
+
+    <select id="listOf" resultMap="Employee">
+        SELECT
+		    <include refid="selectColumns" />
+		FROM
+		    employee.employee
+		INNER JOIN
+		    employee.department
+		ON
+		    employee.department_id = department.department_id
+		ORDER BY
+			employee.employee_id ASC
+    </select>
+
+    <select id="listOfCriteria" resultMap="Employee">
+        SELECT
+		    <include refid="selectColumns" />
+		FROM
+		    employee.employee
+		INNER JOIN
+		    employee.department
+		ON
+		    employee.department_id = department.department_id
+		<where>
+			<if test="criteria.notEmpty">
+				department.department_name LIKE '%' || #{criteria.departmentName} || '%'
+			</if>
+		</where>
+		ORDER BY
+			employee.employee_id ASC
+    </select>
+
+</mapper>
