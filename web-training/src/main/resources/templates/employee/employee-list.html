@@ -7,7 +7,12 @@
 <body>
 	<h1>検索</h1>
 	<form th:action="@{/employee/search}" th:object="${criteria}" method="POST">
-		<input type="text" th:field="*{departmentName}" name="departmentName" th:value="${criteria.departmentName}" />
+		<label for="Department-list">部署</label>
+		<select id="Department-list" th:field="*{departmentId}">
+			<option value="">---</option>
+			<option th:each="department : ${departments.values}" th:value="${department.id.value}"
+				th:text="${department.name.value}" th:selected="${department.id.value == criteria.departmentId}"></option>
+		</select>
 		<input type="submit" value="検索" />
 	</form>
 	<h1>社員一覧</h1>

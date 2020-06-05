@@ -22,5 +22,4 @@ public class DepartmentId {
 	public String toString() {
 		return String.format("DepartmentId [value=%s]", value);
 	}
-
 }

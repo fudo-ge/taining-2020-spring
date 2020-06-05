@@ -9,10 +9,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import example.training.model.department.DepartmentList;
 import example.training.model.employee.Employee;
 import example.training.model.employee.EmployeeList;
 import example.training.model.employee.criteria.EmployeeListCriteria;
 import example.training.model.employee.criteria.EmployeeListCriteriaFactory;
+import example.training.service.department.DepartmentService;
 import example.training.service.employee.EmployeeService;
 
 @Controller
@@ -23,13 +25,18 @@ public class EmployeeController {
 	private EmployeeService employeeService;
 
 	@Autowired
+	private DepartmentService departmentService;
+
+	@Autowired
 	private EmployeeListCriteriaFactory criteriaFactory;
 
-	@GetMapping({"/", "search"})
+	@GetMapping({"", "search"})
 	public String employees(Model model) {
 
 		EmployeeListCriteria criteria = criteriaFactory.create();
-		EmployeeList employees = employeeService.listOf();
+		DepartmentList departments = departmentService.listOf();
+		EmployeeList employees = employeeService.listOf(criteria);
+		model.addAttribute( "departments", departments );
 		model.addAttribute( "employees", employees );
 		model.addAttribute( "criteria", criteria );
 		return "employee/employee-list";
@@ -51,7 +58,10 @@ public class EmployeeController {
 	@PostMapping("search")
 	public String searchEmployees( @ModelAttribute EmployeeListCriteria criteria, Model model ) {
 
+		/* メモ：GETの動作とほとんど同じ事をしているのがすごい気になる */
+		DepartmentList departments = departmentService.listOf();
 		EmployeeList employees = employeeService.listOf(criteria);
+		model.addAttribute( "departments", departments );
 		model.addAttribute( "employees", employees );
 		model.addAttribute( "criteria", criteria );
 		return "employee/employee-list";

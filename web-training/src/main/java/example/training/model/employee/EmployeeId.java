@@ -22,5 +22,4 @@ public class EmployeeId {
 	public String toString() {
 		return String.format("EmployeeId [value=%s]", value);
 	}
-
 }

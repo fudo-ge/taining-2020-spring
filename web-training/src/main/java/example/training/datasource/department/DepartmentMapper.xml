@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="example.training.datasource.department.DepartmentMapper">
+
+    <resultMap id="Department" type="example.training.model.department.Department">
+        <id column="department_id" property="id.value"/>
+        <result column="department_name" property="name.value"/>
+    </resultMap>
+
+    <select id="listOf" resultMap="Department">
+        SELECT
+		    department_id,
+		    department_name
+		FROM
+		    employee.department
+		ORDER BY
+			department_id ASC
+    </select>
+
+</mapper>

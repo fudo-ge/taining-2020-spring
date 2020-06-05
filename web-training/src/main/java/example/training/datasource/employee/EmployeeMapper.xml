@@ -44,22 +44,9 @@
 		    employee.department
 		ON
 		    employee.department_id = department.department_id
-		ORDER BY
-			employee.employee_id ASC
-    </select>
-
-    <select id="listOfCriteria" resultMap="Employee">
-        SELECT
-		    <include refid="selectColumns" />
-		FROM
-		    employee.employee
-		INNER JOIN
-		    employee.department
-		ON
-		    employee.department_id = department.department_id
 		<where>
 			<if test="criteria.notEmpty">
-				department.department_name LIKE '%' || #{criteria.departmentName} || '%'
+				department.department_id = #{criteria.departmentId}
 			</if>
 		</where>
 		ORDER BY

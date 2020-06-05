@@ -39,5 +39,4 @@ public class EmployeeName {
 	public String toString() {
 		return String.format("EmployeeName [firstName=%s, lastName=%s]", firstName, lastName);
 	}
-
 }

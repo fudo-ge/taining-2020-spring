@@ -24,5 +24,4 @@ public class DepartmentName {
 	public String toString() {
 		return String.format("DepartmentName [value=%s]", value);
 	}
-
 }

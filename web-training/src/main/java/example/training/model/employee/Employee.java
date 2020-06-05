@@ -28,8 +28,6 @@ public class Employee {
 		this.department = new EmployeeDepartment();
 	}
 
-
-
 	public EmployeeId getId() {
 		return id;
 	}
@@ -60,5 +58,4 @@ public class Employee {
 		return String.format("Employee [id=%s, name=%s, gender=%s, dateOfBirth=%s, department=%s]", id, name, gender,
 				dateOfBirth, department);
 	}
-
 }

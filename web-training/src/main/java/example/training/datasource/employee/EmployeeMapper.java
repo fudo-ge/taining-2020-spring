@@ -13,8 +13,6 @@ public interface EmployeeMapper {
 
 	Employee findById(@Param("employeeId") Integer employeeId);
 
-	List<Employee> listOf();
-
-	List<Employee> listOfCriteria(@Param("criteria") EmployeeListCriteria criteria);
+	List<Employee> listOf(@Param("criteria") EmployeeListCriteria criteria);
 
 }

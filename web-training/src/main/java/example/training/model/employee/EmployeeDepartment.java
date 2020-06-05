@@ -30,5 +30,4 @@ public class EmployeeDepartment {
 	public String toString() {
 		return String.format("EmployeeDepartment [id=%s, name=%s]", id, name);
 	}
-
 }

@@ -8,8 +8,6 @@ public interface EmployeeService {
 
 	public Employee findById(Integer employeeId);
 
-	public EmployeeList listOf();
-
 	public EmployeeList listOf(EmployeeListCriteria criteria);
 
 }
