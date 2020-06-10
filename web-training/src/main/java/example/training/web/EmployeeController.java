@@ -30,15 +30,11 @@ public class EmployeeController {
 	@Autowired
 	private EmployeeListCriteriaFactory criteriaFactory;
 
-	@GetMapping({"", "search"})
+	@GetMapping
 	public String employees(Model model) {
 
 		EmployeeListCriteria criteria = criteriaFactory.create();
-		DepartmentList departments = departmentService.listOf();
-		EmployeeList employees = employeeService.listOf(criteria);
-		model.addAttribute( "departments", departments );
-		model.addAttribute( "employees", employees );
-		model.addAttribute( "criteria", criteria );
+		prepareEmployee(criteria, model);
 		return "employee/employee-list";
 	}
 
@@ -55,15 +51,19 @@ public class EmployeeController {
 		return "employee/null-pointer-exception";
 	}
 
-	@PostMapping("search")
+	@PostMapping
 	public String searchEmployees( @ModelAttribute EmployeeListCriteria criteria, Model model ) {
 
-		/* メモ：GETの動作とほとんど同じ事をしているのがすごい気になる */
+		prepareEmployee(criteria, model);
+		return "employee/employee-list";
+	}
+
+	private void prepareEmployee(EmployeeListCriteria criteria, Model model) {
+
 		DepartmentList departments = departmentService.listOf();
 		EmployeeList employees = employeeService.listOf(criteria);
 		model.addAttribute( "departments", departments );
 		model.addAttribute( "employees", employees );
 		model.addAttribute( "criteria", criteria );
-		return "employee/employee-list";
 	}
 }
