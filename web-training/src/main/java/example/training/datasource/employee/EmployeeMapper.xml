@@ -45,12 +45,34 @@
 		ON
 		    employee.department_id = department.department_id
 		<where>
-			<if test="criteria.notEmpty">
-				department.department_id = #{criteria.departmentId}
+			<if test="criteria.departmentId.notEmpty">
+				department.department_id = #{criteria.departmentId.value}
 			</if>
 		</where>
 		ORDER BY
 			employee.employee_id ${criteria.employeeIdPriority}
     </select>
+
+    <insert id="insert">
+        INSERT INTO
+        	employee.employee(
+        		employee_id,
+        		first_name,
+        		last_name,
+        		gender_type,
+        		date_of_birth,
+        		department_id,
+        		employee_no
+        	)
+        VALUES(
+        	nextval('employee.id_seq'),
+        	#{employee.name.firstName},
+        	#{employee.name.lastName},
+        	#{employee.gender},
+        	#{employee.dateOfBirth.value},
+        	#{employee.department.id.value},
+        	nextval('employee.no_seq')
+        )
+    </insert>
 
 </mapper>

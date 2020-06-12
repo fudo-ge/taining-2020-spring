@@ -1,20 +1,22 @@
 package example.training.model.employee.criteria;
 
+import example.training.model.department.DepartmentId;
+
 public class EmployeeListCriteria {
 
-	private Integer departmentId;
+	private DepartmentId departmentId;
 	private EmployeeIdPriority employeeIdPriority;
 
 	public EmployeeListCriteria() {
-		this.departmentId = null;
+		this.departmentId = new DepartmentId();
 		this.employeeIdPriority = EmployeeIdPriority.ASC;
 	}
 
-	public Integer getDepartmentId() {
+	public DepartmentId getDepartmentId() {
 		return departmentId;
 	}
 
-	public void setDepartmentId(Integer departmentId) {
+	public void setDepartmentId(DepartmentId departmentId) {
 		this.departmentId = departmentId;
 	}
 
@@ -24,17 +26,6 @@ public class EmployeeListCriteria {
 
 	public void setEmployeeIdPriority(EmployeeIdPriority employeeIdPriority) {
 		this.employeeIdPriority = employeeIdPriority;
-	}
-
-	public boolean isEmpty() {
-		if(departmentId == null) {
-			return true;
-		}
-		return false;
-	}
-
-	public boolean isNotEmpty() {
-		return !isEmpty();
 	}
 
 	@Override

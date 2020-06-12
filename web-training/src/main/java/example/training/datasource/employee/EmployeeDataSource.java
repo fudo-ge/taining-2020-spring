@@ -26,4 +26,9 @@ public class EmployeeDataSource implements EmployeeRepository {
 		EmployeeList employees = new EmployeeList(mapper.listOf(criteria));
 		return employees;
 	}
+
+	@Override
+	public Integer insert(Employee employee) {
+		return mapper.insert(employee);
+	}
 }

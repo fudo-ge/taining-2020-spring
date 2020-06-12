@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8" />
+	<title>登録画面</title>
+</head>
+<body>
+	<h1>登録画面</h1>
+	<form th:action="@{/employee/register}" th:object="${employee}" method="POST">
+		<p><label for="last-name"><span style="color:red">* </span>氏名：姓</label>
+			<input type="text" id="last-name" th:field="*{name.lastName}" />
+		</p>
+		<p style="color:red" th:if="${#fields.hasErrors('name.lastName')}" th:errors="*{name.lastName}"></p>
+		<p><label for="first-name"><span style="color:red">* </span>氏名：名</label>
+			<input type="text" id="first-name" th:field="*{name.firstName}" />
+		</p>
+		<p style="color:red" th:if="${#fields.hasErrors('name.firstName')}" th:errors="*{name.firstName}"></p>
+		<p><span style="color:red">* </span>性別
+			<label for="male">男姓</label>
+			<input type="radio" id="male" th:field="*{gender}" th:value="MALE" />
+			<label for="female">女姓</label>
+			<input type="radio" id="female" th:field="*{gender}" th:value="FEMALE" />
+			<p style="color:red" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"></p>
+		</p>
+		<p><label for="date-of-birth"><span style="color:red">* </span>生年月日</label>
+			<input type="date" id="date-of-birth" th:field="*{dateOfBirth.value}" />
+		</p>
+		<p style="color:red" th:if="${#fields.hasErrors('dateOfBirth.value')}" th:errors="*{dateOfBirth.value}"></p>
+		<p><label for="Department-list"><span style="color:red">* </span>所属部署</label>
+			<select id="Department-list" th:field="*{department.id.value}">
+				<option value="">---</option>
+				<option th:each="department : ${departmentList.values}" th:value="${department.id.value}"
+					th:text="${department.name.value}" th:selected="${department.id.value == employee.department.id.value}"></option>
+			</select>
+		</p>
+		<p style="color:red" th:if="${#fields.hasErrors('department.id.value')}" th:errors="*{department.id.value}"></p>
+		<input type="submit" value="登録" />
+	</form>
+	<p><a th:href="@{/employee}">一覧画面へ</a></p>
+</body>
+</html>

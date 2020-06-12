@@ -1,7 +1,10 @@
 package example.training.model.department;
 
+import javax.validation.constraints.NotNull;
+
 public class DepartmentId {
 
+	@NotNull
 	private Integer value;
 
 	public DepartmentId(Integer value) {
@@ -16,6 +19,17 @@ public class DepartmentId {
 
 	public void setValue(Integer value) {
 		this.value = value;
+	}
+
+	public boolean isEmpty() {
+		if(value == null) {
+			return true;
+		}
+		return false;
+	}
+
+	public boolean isNotEmpty() {
+		return !isEmpty();
 	}
 
 	@Override

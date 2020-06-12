@@ -10,4 +10,5 @@ public interface EmployeeService {
 
 	public EmployeeList listOf(EmployeeListCriteria criteria);
 
+	public Integer insert(Employee employee);
 }

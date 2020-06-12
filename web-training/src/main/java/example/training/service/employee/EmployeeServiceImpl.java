@@ -31,4 +31,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 		return employeeRepository.listOf(criteria);
 	}
+
+	@Override
+	public Integer insert(Employee employee) {
+		return employeeRepository.insert(employee);
+	}
 }
