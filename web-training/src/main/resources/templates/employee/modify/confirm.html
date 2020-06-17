@@ -2,11 +2,24 @@
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8" />
-	<title>変更内容</title>
+	<title>変更内容確認</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" th:inline="javascript">
+    /*<![CDATA[*/
+       $(document).ready(function() {
+            $('#back_button').bind('click', function(){
+                var backUrl = /*[[@{/employee/modify/{employeeId}/back(employeeId=${employee.id.value})}]]*/ 'form.html';
+                $('#employee_form').attr('action', backUrl);
+                $('#employee_form').submit();
+            });
+        });
+    /*]]>*/
+    </script>
 </head>
 <body>
-	<h1>変更内容</h1>
-	<form th:action="@{/employee/modify/update}" th:object="${employee}" method="POST">
+	<h1>変更内容確認</h1>
+	<form id="employee_form" th:action="@{/employee/modify/{employeeId}/update(employeeId=${employee.id.value})}"
+	th:object="${employee}" method="POST">
 		<table>
 			<tbody>
 				<tr>
@@ -37,6 +50,7 @@
 		<input type="hidden" th:field="*{gender}" />
 		<input type="hidden" th:field="*{dateOfBirth.value}" />
 		<input type="hidden" th:field="*{department.id.value}" />
+		<input id="back_button" type="button" value="戻る" />
 		<input type="submit" value="変更" />
 	</form>
 	<p><a th:href="@{/employee}">一覧画面へ</a></p>

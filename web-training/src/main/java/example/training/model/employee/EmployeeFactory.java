@@ -9,7 +9,4 @@ public class EmployeeFactory {
 		return new Employee();
 	}
 
-	public ConfirmationEmployee confirmationCreate() {
-		return new ConfirmationEmployee();
-	}
 }

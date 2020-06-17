@@ -6,7 +6,8 @@
 </head>
 <body>
 	<h1>登録画面</h1>
-	<form th:action="@{/employee/modify}" th:object="${employee}" method="POST">
+	<form th:action="@{/employee/modify/{employeeId}(employeeId=${employee.id.value})}"
+	th:object="${employee}" method="POST">
 		<p>　社員ＩＤ：<th:block th:text="*{id.value}"></th:block></p>
 		<input type="hidden" th:field="*{id.value}" />
 		<p><label for="last-name"><span style="color:red">* </span>氏名：姓</label>
@@ -32,7 +33,8 @@
 			<select id="Department-list" th:field="*{department.id.value}">
 				<option value="">---</option>
 				<option th:each="department : ${departmentList.values}" th:value="${department.id.value}"
-					th:text="${department.name.value}" th:selected="${department.id.value == employee.department.id.value}"></option>
+				th:text="${department.name.value}"
+				th:selected="${department.id.value == employee.department.id.value}"></option>
 			</select>
 		</p>
 		<p style="color:red" th:if="${#fields.hasErrors('department.id.value')}" th:errors="*{department.id.value}"></p>
