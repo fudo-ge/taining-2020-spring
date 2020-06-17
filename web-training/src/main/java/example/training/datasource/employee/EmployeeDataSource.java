@@ -28,7 +28,17 @@ public class EmployeeDataSource implements EmployeeRepository {
 	}
 
 	@Override
-	public Integer insert(Employee employee) {
-		return mapper.insert(employee);
+	public void insert(Employee employee) {
+		mapper.insert(employee);
+	}
+
+	@Override
+	public void update(Employee employee) {
+		mapper.update(employee);
+	}
+
+	@Override
+	public void delete(Integer employeeId) {
+		mapper.delete(employeeId);
 	}
 }

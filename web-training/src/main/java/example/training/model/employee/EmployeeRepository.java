@@ -8,6 +8,10 @@ public interface EmployeeRepository {
 
 	public EmployeeList listOf(EmployeeListCriteria criteria);
 
-	public Integer insert(Employee employee);
+	public void insert(Employee employee);
+
+	public void update(Employee employee);
+
+	public void delete(Integer employeeId);
 
 }

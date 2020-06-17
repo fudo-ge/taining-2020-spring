@@ -6,34 +6,28 @@
 </head>
 <body>
 	<h1>入力内容</h1>
-	<form th:action="@{/employee/register/insert}" th:object="${employee}" method="POST">
-		<table>
-			<tbody>
-				<tr>
-					<th>氏名</th>
-					<td th:text="${employee.name.fullName()}">テスト　太郎</td>
-				</tr>
-				<tr>
-					<th>性別</th>
-					<td th:text="${employee.gender.label}">男性</td>
-				</tr>
-				<tr>
-					<th>生年月日</th>
-					<td th:text="${employee.dateOfBirth.value}">1983/6/14</td>
-				</tr>
-				<tr>
-					<th>所属部署</th>
-					<td th:text="${departmentList.departmentNameById(__*{department.id.value}__)}">バスケ部</td>
-				</tr>
-			</tbody>
-		</table>
-		<input type="hidden" th:field="*{name.lastName}" />
-		<input type="hidden" th:field="*{name.firstName}" />
-		<input type="hidden" th:field="*{gender}" />
-		<input type="hidden" th:field="*{dateOfBirth.value}" />
-		<input type="hidden" th:field="*{department.id.value}" />
-		<input type="submit" value="登録" />
-	</form>
+	<table th:object="${employee}">
+		<tbody>
+			<tr>
+				<th>氏名</th>
+				<td th:text="*{name.fullName()}">テスト　太郎</td>
+			</tr>
+			<tr>
+				<th>性別</th>
+				<td th:text="*{gender.label}">男性</td>
+			</tr>
+			<tr>
+				<th>生年月日</th>
+				<td th:text="*{#temporals.format(dateOfBirth.value, 'yyyy年M月d日')}">1983/6/14</td>
+			</tr>
+			<tr>
+				<th>所属部署</th>
+				<td th:text="${departmentList.departmentNameById(__*{department.id.value}__)}">バスケ部</td>
+			</tr>
+		</tbody>
+	</table>
+	<input type="button" value="戻る" th:onclick="|location.href='@{/employee/register}'|"/>
+	<input type="button" value="登録" th:onclick="|location.href='@{/employee/register/insert}'|"/>
 	<p><a th:href="@{/employee/register}">登録画面へ</a></p>
 </body>
 </html>

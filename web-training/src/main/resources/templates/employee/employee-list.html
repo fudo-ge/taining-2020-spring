@@ -30,6 +30,7 @@
 				<th>氏名</th>
 				<th>性別</th>
 				<th>部署名</th>
+				<th>社員の削除</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -38,6 +39,7 @@
 				<td><a th:href="@{/employee/{employeeId}(employeeId=*{id.value})}"th:text="*{name.fullName()}">かこ 太郎</a></td>
 				<td th:text="*{gender.label}">男性</td>
 				<td th:text="*{department.name.value}">バスケ部</td>
+				<td><a th:href="@{/employee/delete/{employeeId}(employeeId=*{id.value})}"th:text="削除">削除</a></td>
 			</tr>
 		</tbody>
 	</table>

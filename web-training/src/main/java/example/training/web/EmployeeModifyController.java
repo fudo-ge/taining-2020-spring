@@ -7,24 +7,23 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import example.training.model.department.DepartmentList;
+import example.training.model.employee.ConfirmationEmployee;
 import example.training.model.employee.Employee;
 import example.training.model.employee.EmployeeFactory;
 import example.training.service.department.DepartmentService;
 import example.training.service.employee.EmployeeService;
 
 @Controller
-@SessionAttributes(value = "employee")
-@RequestMapping("employee/register")
-public class EmployeeRegisterController {
-
-	@Autowired
-	private EmployeeFactory employeeFactory;
+@RequestMapping("employee/modify")
+@SessionAttributes(types = ConfirmationEmployee.class)
+public class EmployeeModifyController {
 
 	@Autowired
 	private DepartmentService departmentService;
@@ -32,32 +31,42 @@ public class EmployeeRegisterController {
 	@Autowired
 	private EmployeeService employeeService;
 
-	@ModelAttribute(value = "employee")
-	public Employee setUpEmployee() {
-		return employeeFactory.create();
-	}
+	@Autowired
+	private EmployeeFactory employeeFactory;
 
-	@GetMapping
-	public String form(Model model) {
+	@GetMapping("{employeeId:\\d+}")
+	public String form( @PathVariable Integer employeeId, Model model ) {
+
+		Employee employee = employeeService.findById(employeeId);
 		DepartmentList departmentList = departmentService.listOf();
 		model.addAttribute("departmentList", departmentList);
-		return "employee/register/form";
+		model.addAttribute( "employee", employee );
+		return "employee/modify/form";
 	}
 
 	@PostMapping
-	public String confirm(@Validated Employee employee, BindingResult result, Model model) {
+	public String confirm(@Validated @ModelAttribute Employee employee, BindingResult result, Model model) {
 		DepartmentList departmentList = departmentService.listOf();
+		model.addAttribute("employee", employee);
 		model.addAttribute("departmentList", departmentList);
 		if(result.hasErrors()) {
-			return "employee/register/form";
+			return "employee/modify/form";
 		}
-		return "employee/register/confirm";
+		ConfirmationEmployee confirmationEmployee = employeeFactory.confirmationCreate();
+		confirmationEmployee.setAll(employee);
+		model.addAttribute( "confirmationEmployee", confirmationEmployee );
+		return "employee/modify/confirm";
 	}
 
-	@GetMapping("insert")
-	public String insert(@ModelAttribute Employee employee, SessionStatus sessionStatus) {
-		employeeService.insert(employee);
+	@PostMapping("update")
+	public String insert(@ModelAttribute Employee employee, ConfirmationEmployee confirmationEmployee,
+			SessionStatus sessionStatus) {
+		if(confirmationEmployee.isSame(employee)) {
+			sessionStatus.setComplete();
+			employeeService.update(employee);
+			return String.format("redirect:/employee/%s", employee.getId().getValue());
+		}
 		sessionStatus.setComplete();
-		return "redirect:/employee";
+		return "employee/modify/confirm-error";
 	}
 }

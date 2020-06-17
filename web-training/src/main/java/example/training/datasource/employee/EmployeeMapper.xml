@@ -75,4 +75,24 @@
         )
     </insert>
 
+    <update id="update">
+    	UPDATE
+    		employee.employee
+    	SET
+    		first_name = #{employee.name.firstName},
+        	last_name = #{employee.name.lastName},
+        	gender_type = #{employee.gender},
+        	date_of_birth = #{employee.dateOfBirth.value},
+        	department_id = #{employee.department.id.value}
+    	WHERE
+    		employee_id = #{employee.id.value}
+    </update>
+
+    <delete id="delete">
+    	DELETE FROM
+    		employee.employee
+    	WHERE
+    		employee_id = #{employeeId}
+    </delete>
+
 </mapper>

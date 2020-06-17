@@ -15,6 +15,9 @@ public interface EmployeeMapper {
 
 	List<Employee> listOf(@Param("criteria") EmployeeListCriteria criteria);
 
-	Integer insert(@Param("employee") Employee employee);
+	void insert(@Param("employee") Employee employee);
 
+	void update(@Param("employee") Employee employee);
+
+	void delete(@Param("employeeId") Integer employeeId);
 }

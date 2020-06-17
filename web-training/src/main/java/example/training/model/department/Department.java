@@ -1,6 +1,10 @@
 package example.training.model.department;
 
-public class Department {
+import java.io.Serializable;
+
+public class Department implements Serializable {
+
+	private static final long serialVersionUID = -3160831305491946801L;
 
 	private DepartmentId id;
 	private DepartmentName name;

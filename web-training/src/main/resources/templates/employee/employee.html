@@ -22,7 +22,7 @@
 			</tr>
 			<tr>
 				<th>生年月日</th>
-				<td th:text="${employee.dateOfBirth.value}">1983/6/14</td>
+				<td th:text="${#temporals.format(employee.dateOfBirth.value, 'yyyy年M月d日')}">1983/6/14</td>
 			</tr>
 			<tr>
 				<th>所属部署</th>
@@ -30,5 +30,7 @@
 			</tr>
 		</tbody>
 	</table>
+	<p><a th:href="@{'modify/' + ${employee.id.value}}">社員情報を編集する</a></p>
+	<p><a th:href="@{/employee}">一覧画面へ</a></p>
 </body>
 </html>

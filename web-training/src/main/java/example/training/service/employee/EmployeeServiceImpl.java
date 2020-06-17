@@ -33,7 +33,17 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 	@Override
-	public Integer insert(Employee employee) {
-		return employeeRepository.insert(employee);
+	public void insert(Employee employee) {
+		employeeRepository.insert(employee);
+	}
+
+	@Override
+	public void update(Employee employee) {
+		employeeRepository.update(employee);
+	}
+
+	@Override
+	public void delete(Integer employeeId) {
+		employeeRepository.delete(employeeId);
 	}
 }

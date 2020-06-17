@@ -1,10 +1,14 @@
 package example.training.model.employee;
 
+import java.io.Serializable;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-public class EmployeeName {
+public class EmployeeName implements Serializable {
+
+	private static final long serialVersionUID = -2592418281166105294L;
 
 	@NotBlank
 	@Size(max = 100)

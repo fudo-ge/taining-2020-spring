@@ -1,9 +1,12 @@
 package example.training.model.employee;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EmployeeList {
+public class EmployeeList implements Serializable {
+
+	private static final long serialVersionUID = 559006414358899709L;
 
 	private List<Employee> values;
 
