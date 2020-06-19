@@ -5,6 +5,7 @@
 	<title>社員一覧</title>
 </head>
 <body>
+	<p th:text="|${name}でログイン中|"></p>
 	<h1>検索</h1>
 	<form th:action="@{/employee}" th:object="${criteria}" method="POST">
 		<p>
@@ -45,5 +46,6 @@
 	</table>
 	<p th:if="${employees.empty}">表示できる社員情報がありませんでした。</p>
 	<p><a th:href="@{/employee/register}">登録画面へ</a></p>
+	<p><a th:href="@{/logout}">ログアウト</a></p>
 </body>
 </html>

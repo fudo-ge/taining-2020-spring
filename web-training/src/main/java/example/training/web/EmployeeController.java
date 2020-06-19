@@ -1,6 +1,7 @@
 package example.training.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,7 @@ import example.training.model.employee.Employee;
 import example.training.model.employee.EmployeeList;
 import example.training.model.employee.criteria.EmployeeListCriteria;
 import example.training.model.employee.criteria.EmployeeListCriteriaFactory;
+import example.training.model.security.UserPrincipal;
 import example.training.service.department.DepartmentService;
 import example.training.service.employee.EmployeeService;
 
@@ -32,7 +34,9 @@ public class EmployeeController {
 
 	@GetMapping
 	public String employees(Model model) {
-
+		UserPrincipal principal = (UserPrincipal)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String name = principal.getName().getValue();
+	    model.addAttribute("name", name);
 		EmployeeListCriteria criteria = criteriaFactory.create();
 		prepareEmployee(criteria, model);
 		return "employee/employee-list";
